@@ -15,19 +15,19 @@ const app = new Vue({
     el: '#app',
     data: {
         contEmail: [],
+        loading: false,
     },
-    // computed: {
-    //     genEmail2: (e => {
-    //         for (let i = 0; i < 10; i++) {
-    //             contEmail.push({
-    //                 email: e,
-    //             });
-    //         }
-    //     })
-    // },
+    computed: {
+        loadingStatus() {
+                if (this.contEmail.length === 10) {
+                   return this.loading = true;
+                }
+            console.log(this.contEmail.length);
+            },
+    },
+   
     created() {
-        //AJAX REQUEST 
-        
+        //AJAX REQUEST  
         for (let i = 0; i < 10; i++) {
             axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
             .then(emailList => {
@@ -40,7 +40,8 @@ const app = new Vue({
                 console.log(err);
             })
         }
-        
+
+       
         console.log(this.contEmail);
     }
     
